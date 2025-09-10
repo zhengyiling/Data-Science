@@ -1,7 +1,7 @@
 What is A/B Testing?
 It's an experimental method used to compare two versions of something to see which one performs better against a defined goal.
 
-Why using A/B Testing?
+Why use A/B Testing?
 1. it helps the company to make data-driven decisions and not just rely on guesswork or opinions.
 2. it can help the company better understand the users by analysing how they bahave to the certain changes, and from there the user experience could be optimized properly.
 
@@ -35,7 +35,7 @@ The delta is the minimum detectable effect(MDE), the gap between the null hypoth
   - the smaller delta want to detect, the larger the sample size will be needed.
 
 What is the sigma?
-Then sigma is standard deviation of the distribution, which indicates how noisy the metric is.
+The sigma is standard deviation of the distribution, which indicates how noisy the metric is.
   - the larger sigma means much bigger sample is needed to detect delta.
 
 What is the test result is not statistically significant?
