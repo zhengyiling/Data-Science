@@ -6,10 +6,7 @@
 A/B tesing is an experimental method used to compare two versions of a product feature to see which one performs better against a defined goal.
 
 **How to explain A/B testing to a non-technical stakeholder?**  
-A/B testing is a way to run an experiment where we compare two versions of a product feature. There will be two groups of users, the control group and the treatment group. 
-The control group sees the current version of the feature, and the treatment group sees the new version of the feature. The only difference between the two is the feature we want to test. 
-Then we can track a key metric to see whether the new version leads to a better result. 
-If the result of the difference is big enough, and it’s unlikely caused by chance, we can then confidently decide whether to roll out the new version.
+A/B testing is like a controlled experiment. We show some users the current version and others the new one, then compare how each group behaves. If the new version clearly performs better—and not just by chance—we can confidently decide to roll it out.
 
 **Why use A/B Testing?**  
 1. It helps the company to make data-driven decisions to grow the business and not just rely on guesswork or opinions.
