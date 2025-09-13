@@ -3,12 +3,11 @@
 ## Understanding A/B Test  
 
 **What is A/B testing?**  
-It's an experimental method used to compare two versions of a product feature to see which one performs better against a defined goal.
+A/B tesing is an experimental method used to compare two versions of a product feature to see which one performs better against a defined goal.
 
 **How to explain A/B testing to a non-technical stakeholder?**  
 A/B testing is a way to run an experiment where we compare two versions of a product feature. There will be two groups of users, control group and treatment group. 
-The control group sees the current version, and the treatment group sees the new version with the change. 
-The only difference between the two is the feature we want to test. 
+The control group sees the current version, and the treatment group sees the new version with the change. The only difference between the two is the feature we want to test. 
 Then we track a key metric — like click-through rate or sign-ups — to see if the new version leads to better results. 
 If the difference is big enough, and it’s unlikely caused by chance, we can then confidently decide whether to roll out the new change.
 
@@ -17,9 +16,9 @@ If the difference is big enough, and it’s unlikely caused by chance, we can th
 2. It can help the company better understand the users by analyzing how they behave to the certain changes, and from there the user experience could be optimized properly.
    
 **What is the framework of A/B Testing?**  
-1. Define objective & hypothesis (null + alternative)
-2. Select metrics: primary, secondary, guardrails
-3. Design variants and allocation (randomization, blocking/stratification)
+1. Start with a clear hypothesis.
+2. Pick metrics: primary(success), secondary, guardrails. (conversation rate, CTR, revenue per visitor, average watch time)
+3. Design variants and allocation (population, randomization, blocking/stratification)
 4. Calculate sample size, power, and test duration; set stopping rules
 5. Implement changes and instrument tracking; run QA
 6. Launch and monitor health metrics (no early peeking)
@@ -65,7 +64,7 @@ use a t-test or bootstrap for inference, monitor guardrail metrics, and apply co
 ## Evaluating A/B Test  
 
 **What is the p-value?**  
-The p-value is the probability of obtaining results at least as extreme as the ones observed, assuming the null hypothesis is true.
+The p-value is the assumed probability that null hypothesis is true.
   a. if the p-value < 0.05, the null hypothesis can be rejected and the result is statistically significant.
   b. if the p-value >= 0.05, there is not enough evidence to reject the null hypothesis.
 
@@ -73,15 +72,19 @@ The p-value is the probability of obtaining results at least as extreme as the o
 It means there is not enough evidence to say that the treatment group is better than the control group.
 
 **Suppose you run an A/B test and the result is not statistically significant. What would you do next?**  
-If a test result isn’t statistically significant, the first step is to check if the test was run long enough and included enough users to reach statistical power, while also accounting for factors like novelty effects or seasonality. 
-Next, I’d review whether we chose the right success metric and if the population is too noisy to hide an effect. 
+If a test result isn’t statistically significant, the first step is to check if the test was run long enough and included enough users to reach statistical power, while also accounting for factors like novelty effects or seasonality. Next, I’d review whether we chose the right success metric and if the population is too noisy to hide an effect. 
 If everything looks correct, I’d accept that the change may not have a meaningful impact — which is still useful information. 
 If there are design issues, I’d adjust — for example by increasing sample size, refining the target users, or clarifying the hypothesis — and then rerun the test.
 
 **What are common pitfalls in A/B Testing?**  
-1. not randomizing correcting, which can lead to bias.
-2. wrong metric selection.
-3. not running long enough to avoid novelty effect or seasonality to get enough data.
+1. Stop the test too early (peeking bias) - follow the predefine sample size and runtime.
+2. Underpowered(sample size is too small) - use power analysis to define the effective sample size.
+3. Unclear success metric(vague metric to track performance) - preregister primary, secondary and guardrail metrics.
+4. Multiple comparisons(too many variants tested at the same time, inflates false positive) - adjust Bonferroni, FDR or clearly label secondary metrics as exploratory.
+5. Ignore novelty effect(new design can fade once adapt) - run long enough to see stable behavior, check persistence post-rollout.
+6. Poor randomization or contamination(same user sees the both variants or traffic not evenly split) - randomize at stale user_id level.
+7. Wrong unit of analysis(randomizing level and analyzing level are different) - align randomization unit with analysis unit.
+
 
 **How would you handle multiple A/B tests running at the same time?**  
 When multiple A/B tests run at the same time, the main concerns are interaction effects and inflated false positives. 
