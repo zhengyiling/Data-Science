@@ -35,8 +35,8 @@ To calculate the sample size for an A/B test, I’d use power analysis. The key 
 2. Minimum detectable effect, the smallest change worth detecting
 3. Significance level alpha and statistical power 1- beta
 
-The industry standard for these two inputs are typically, alpha as 0,05 and power as 0.8.
-With these inputs, I’d either use the standard sample size formula for proportions or rely on a calculator/tool like Statsmodels in Python.
+The industry standard for these two inputs are typically, alpha as 0.05 and power as 0.8.
+With these inputs, I’d either use the standard sample size formula for proportions or rely on a calculator tool like Statsmodels in Python.
 In practice, a smaller baseline or a smaller MDE means we need a much larger sample to achieve the same confidence.
 This ensures the test is neither underpowered (can’t detect real effects) nor overpowered (wasting traffic).
 
@@ -45,19 +45,46 @@ The alpha is the significance level, which indicates the probability of type 1 e
   - when alpha is lower, the confidence level of the result is higher and the uncertainty is lower, which means sample size should be larger.
 
 **What is the beta?**  
-The beta is the probability of type 2 error (the null hypothesis is failed to rejected while the alternative hypothesis is true, false negative in confusion matrix).
+The beta is the probability of type 2 error (the null hypothesis is failed to reject while the alternative hypothesis is true, false negative in confusion matrix).
   - beta = 1 - power, power is the probability that we want to reject the null hypothesis, common power level is 80%.
 
 **What is the delta?**  
-The delta is the minimum detectable effect(MDE), the gap between the null hypothesis and the alternative hypothesis you care about.
+The delta is the minimum detectable effect(MDE), the difference between the control version and the treatment version.
   - the smaller delta wants to detect, the larger the sample size will be needed.
 
 **What is the sigma?**  
 The sigma is the standard deviation of the distribution, which indicates how noisy the metric is.
   - the larger sigma means a much bigger sample is needed to detect delta.
 
-**A/B test design: Increase YouTube watch time (end-to-end plan)**  
+**How to design an A/B test about Increase YouTube watch time (end-to-end plan)?**  
 I’d run a randomized experiment where users are assigned by user-id to control or personalized autoplay thumbnails. 
 Primary metric is average watch time per user over 24 hours. 
 I’d compute sample size using baseline variance and a chosen MDE, run the test across at least a weekly cycle, 
 use a t-test or bootstrap for inference, monitor guardrail metrics, and apply corrections for multiple tests or interactions before rolling out.
+
+## Evaluating A/B Test  
+
+**What is the p-value?**  
+The p-value is the probability of obtaining results at least as extreme as the ones observed, assuming the null hypothesis is true.
+  a. if the p-value < 0.05, the null hypothesis can be rejected and the result is statistically significant.
+  b. if the p-value >= 0.05, there is not enough evidence to reject the null hypothesis.
+
+**What is the test result is not statistically significant?**  
+It means there is not enough evidence to say that the treatment group is better than the control group.
+
+**Suppose you run an A/B test and the result is not statistically significant. What would you do next?**  
+If a test result isn’t statistically significant, the first step is to check if the test was run long enough and included enough users to reach statistical power, while also accounting for factors like novelty effects or seasonality. 
+Next, I’d review whether we chose the right success metric and if the population is too noisy to hide an effect. 
+If everything looks correct, I’d accept that the change may not have a meaningful impact — which is still useful information. 
+If there are design issues, I’d adjust — for example by increasing sample size, refining the target users, or clarifying the hypothesis — and then rerun the test.
+
+**What are common pitfalls in A/B Testing?**  
+1. not randomizing correcting, which can lead to bias.
+2. wrong metric selection.
+3. not running long enough to avoid novelty effect or seasonality to get enough data.
+
+**How would you handle multiple A/B tests running at the same time?**  
+When multiple A/B tests run at the same time, the main concerns are interaction effects and inflated false positives. 
+I’d first check whether the experiments overlap in the user journey — for example, a pricing page test and a checkout flow test may interfere, but a search page test and a recommendation ranking test might not.
+If they’re independent, we can safely run them in parallel by splitting traffic randomly. If they target the same users or metrics, I’d consider either staggering them or using a multivariate/factorial design to capture interaction effects.
+On the analysis side, I’d apply multiple testing corrections, like Bonferroni or false discovery rate (FDR), to control for inflated Type I error. Finally, I’d ensure traffic is allocated properly so each test remains powered.
