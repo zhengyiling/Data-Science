@@ -84,6 +84,7 @@ If there are design issues, I’d adjust — for example by increasing sample si
 5. Ignore novelty effect(new design can fade once adapt) - run long enough to see stable behavior, check persistence post-rollout.
 6. Poor randomization or contamination(same user sees the both variants or traffic not evenly split) - randomize at stale user_id level.
 7. Wrong unit of analysis(randomizing level and analyzing level are different) - align randomization unit with analysis unit.
+<img width="953" height="538" alt="ab tesing pitfalls" src="https://github.com/user-attachments/assets/d061231d-181c-407b-afa5-b524e7542cfe" />
 
 
 **How would you handle multiple A/B tests running at the same time?**  
