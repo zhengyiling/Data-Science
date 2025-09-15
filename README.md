@@ -87,7 +87,5 @@ If there are design issues, I’d adjust — for example by increasing sample si
 
 
 **How would you handle multiple A/B tests running at the same time?**  
-When multiple A/B tests run at the same time, the main concerns are interaction effects and inflated false positives. 
-I’d first check whether the experiments overlap in the user journey — for example, a pricing page test and a checkout flow test may interfere, but a search page test and a recommendation ranking test might not.
-If they’re independent, we can safely run them in parallel by splitting traffic randomly. If they target the same users or metrics, I’d consider either staggering them or using a multivariate/factorial design to capture interaction effects.
-On the analysis side, I’d apply multiple testing corrections, like Bonferroni or false discovery rate (FDR), to control for inflated Type I error. Finally, I’d ensure traffic is allocated properly so each test remains powered.
+I’d first check if they’re independent, if yes, we can safely run them in parallel by splitting traffic randomly. If they're not, I’d consider either staggering them or using a multivariate design to capture interaction effects.
+On the analysis side, I’d apply multiple testing corrections, like Bonferroni or false discovery rate, to control for inflated false positives. On the last, I’d ensure traffic is allocated properly so each test remains powered.
