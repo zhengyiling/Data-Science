@@ -9,12 +9,13 @@ A/B tesing is an experimental method used to compare two versions of a product f
 A/B testing is like a controlled experiment. We show some users the current version and others the new one, then compare how each group behaves. If the new version clearly performs better—and not just by chance—we can confidently decide to roll it out.
 
 **Why use A/B Testing?**  
-1. It helps the company to make data-driven decisions to grow the business and not just rely on guesswork or opinions.
-2. It can help the company better understand the users by analyzing how they behave to the certain changes, and from there the user experience could be optimized properly.
+1. It isolates the feature's true effect, and estabilshes causality not just correlation.
+2. It can reduce the rollout risk since it test on subset, if it fails, the damage is limited.
+3. By showing statistically valid results, we can ensure decisions are based on eveidence rather than guesswork.
    
 **What is the framework of A/B Testing?**  
-1. Start with a clear hypothesis.
-2. Pick metrics: primary(success), secondary, guardrails. (conversation rate, CTR, revenue per visitor, average watch time)
+1. Start with a clear goal and hypothesis.
+2. Pick metrics: primary(success), secondary, guardrails. 
 3. Design variants and allocation (population, randomization, blocking/stratification)
 4. Calculate sample size, power, and test duration; set stopping rules
 5. Implement changes and instrument tracking; run QA
@@ -54,7 +55,7 @@ The sigma is the standard deviation of the distribution, which indicates how noi
 
 **How to design an A/B test about Increase YouTube watch time (end-to-end plan)?**  
 I’d run a randomized experiment where users are assigned by user-id to control or personalized autoplay thumbnails. 
-Primary metric is average watch time per user over 24 hours. 
+Primary metric is average watch time per user session.
 I’d compute sample size using baseline variance and a chosen MDE, run the test across at least a weekly cycle, 
 use a t-test or bootstrap for inference, monitor guardrail metrics, and apply corrections for multiple tests or interactions before rolling out.
 
@@ -69,12 +70,13 @@ The p-value is the assumed probability that null hypothesis is true.
 It means there is not enough evidence to say that the treatment group is better than the control group.
 
 **Suppose you run an A/B test and the result is not statistically significant. What would you do next?**  
-If a test result isn’t statistically significant, the first step is to check if the test was run long enough and included enough users to reach statistical power, while also accounting for factors like novelty effects or seasonality. Next, I’d review whether we chose the right success metric and if the population is too noisy to hide an effect. 
+If a test result isn’t statistically significant, the first step is to check if the test was run long enough and included enough users to reach statistical power, while also accounting for factors like novelty effects or seasonality. 
+Next, I’d review whether we chose the right success metric and if the population is too noisy to hide an effect. 
 If everything looks correct, I’d accept that the change may not have a meaningful impact — which is still useful information. 
 If there are design issues, I’d adjust — for example by increasing sample size, refining the target users, or clarifying the hypothesis — and then rerun the test.
 
 **What are common pitfalls in A/B Testing?**  
-1. Stop the test too early (peeking bias) - follow the predefine sample size and runtime.
+1. Stop the test too early (peeking bias) - to run the test until required sample size or durantion is reached.
 2. Underpowered(sample size is too small) - use power analysis to define the effective sample size.
 3. Unclear success metric(vague metric to track performance) - preregister primary, secondary and guardrail metrics.
 4. Multiple comparisons(too many variants tested at the same time, inflates false positive) - adjust Bonferroni, FDR or clearly label secondary metrics as exploratory.
