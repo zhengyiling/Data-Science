@@ -13,6 +13,8 @@ The secondary metrics can be the CTR on the "next up" thumbnails, the numbers of
 The guardrail metric can be user compliants, unsubscribe rate and increase in errors.
 
 **3.Select the population and calculate the sample size**
+Randomly assign users into the A or B groups. Use power analysis to calculate the effective sample size.
 
+**4.
 
 
