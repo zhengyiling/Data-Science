@@ -2,17 +2,17 @@
 
 ## How to increate Youtube watch time (end to end plan)?
 
-**1. Define the goal and hypothesis**  
+**1. Hypothesis formulation**  
 Let's say the change is redesigning the "next up" thumbnails to autoplay personalized user's recent watch history rather than the current generic content. The goal is to increase the average watch time per unique user over a 24hrs session for 2 minutes with the baseline 20 minutes. So the hypothesis is personalized autoplay thumbnails will increase the average watch time per user over a session by 10%.
 - Null hypothesis: personalized autoplay thumbnails would not extend the watch time of users per session.  
 - Alternative hypothesis: with the personalized autoplay thumbnails, the average watch time increased by at least the MDE.
 
-**2. Pick the right metrics**  
+**2. Target metrics definition**  
 The primary metric is the average watch time per unique user over a 24hrs session.  
 The secondary metrics can be the CTR on the "next up" thumbnails, the numbers of videos watched per session and session RPM.
 The guardrail metric can be user compliants, unsubscribe rate and increase in errors.
 
-**3. Calculate sample size**
+**3. Sample size calculation**
 ```
 -- Step 1: Pull user-level aggregated watch time
 WITH user_sessions AS (
@@ -67,6 +67,7 @@ print(f"Total sample size: {np.ceil(sample_size*2):,.0f}")
 Required sample size per group: 3,528
 Total sample size: 7,056
 ```
-**4.
+**4. Rondomization strategy**
+**5. Control group design**
 
 
