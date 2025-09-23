@@ -88,4 +88,9 @@ If there are design issues, I’d adjust — for example by increasing sample si
 
 **How would you handle multiple A/B tests running at the same time?**  
 I’d first check if they’re independent, if yes, we can safely run them in parallel by splitting traffic randomly. If they're not, I’d consider either staggering them or using a multivariate design to capture interaction effects.
-On the analysis side, I’d apply multiple testing corrections, like Bonferroni or false discovery rate, to control for inflated false positives. On the last, I’d ensure traffic is allocated properly so each test remains powered.
+On the analysis side, I’d apply multiple testing corrections, like Bonferroni or false discovery rate, to control for inflated false positives. On the last, I’d ensure traffic is allocated properly so each test remains powered.  
+
+# Case Study  
+
+[Youtube Average Watch Time](https://github.com/zhengyiling/Data-Science/blob/main/case_study/youtube_avg_watchtime.md)  
+
